@@ -23,3 +23,7 @@ Route::get('/sair', [HomeController::class, 'sair'])->name('sair');
 //DASHBOARD
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('autorizacao')->name('dashboard');
 Route::post('/dashboard', [HomeController::class, 'dashboard'])->middleware('acessodash')->name('dashboard');
+
+//ADMIN COM AUTH
+Route::get('/admin', [HomeController::class, 'loginAdmin'])->name('admin');
+Route::post('/admin', [HomeController::class, 'admin'])->name('admin');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -104,5 +105,21 @@ class HomeController extends Controller
     public function sair(){
         session()->forget('user');
         return view('login');
+    }
+
+    public function loginAdmin(){
+
+        return view('admin');
+    }
+
+    public function admin(Request $request){
+       
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            dd("logou");
+        }
+        
+        else{
+            dd("não logou");
+        }
     }
 }
