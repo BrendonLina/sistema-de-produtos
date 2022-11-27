@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        return view('index');
     }
 
     /**
@@ -80,5 +81,28 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function login(){
+        
+        if(session()->has('user')){
+            return redirect()->route('dashboard');
+        }
+        return view('login');
+    }
+
+    public function dashboard(Request $request){
+              
+      session()->put('user','logado');
+      $email = $request->email; 
+      $usu = User::where('email',$email)->first();
+
+      return view('dashboard', compact('usu'));
+      
+    }
+
+    public function sair(){
+        session()->forget('user');
+        return view('login');
     }
 }

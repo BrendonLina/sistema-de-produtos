@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::get('/sair', [HomeController::class, 'sair'])->name('sair');
+
+//DASHBOARD
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('autorizacao')->name('dashboard');
+Route::post('/dashboard', [HomeController::class, 'dashboard'])->middleware('acessodash')->name('dashboard');
